@@ -103,7 +103,7 @@ class Login extends Component {
     });
 
     // Send a POST request to the server
-    fetch('http://localhost:5000/register', {
+    fetch('https://backend8-m1tj.onrender.com/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
