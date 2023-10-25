@@ -91,6 +91,42 @@ class Login extends Component {
         announcement: '',
       },
     });
+
+    // Construct the request body
+    const requestBody = JSON.stringify({
+      email,
+      firstName,
+      lastName,
+      announcement,
+      date: new Date().toLocaleDateString(), // Include the date in the request
+      topic1: newTopic, // Update topic1 with the announcement and date
+    });
+
+    // Send a POST request to the server
+    fetch('http://localhost:5000/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: requestBody,
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Handle success (you can add success logic here)
+        } else {
+          this.setState({
+            isAuthenticated: false,
+            error: 'Registration failed. User already exists or other error.',
+          });
+        }
+      })
+      .catch((error) => {
+        console.error('Error sending data to the backend:', error);
+        this.setState({
+          isAuthenticated: false,
+          error: 'An error occurred while communicating with the server',
+        });
+      });
   }
 
   handleDelete() {
